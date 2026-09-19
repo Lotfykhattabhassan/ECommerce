@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Application/MiniECommerce.Modules.Inventory.Application.csproj" />
+    <ProjectReference Include="../Domain/MiniECommerce.Modules.Inventory.Domain.csproj" />
+    <ProjectReference Include="../../../BuildingBlocks/Infrastructure/MiniECommerce.BuildingBlocks.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

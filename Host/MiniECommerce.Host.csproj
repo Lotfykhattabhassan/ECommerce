@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="16.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="10.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="10.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.12">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="10.0.12" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="10.0.12">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.2.3" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Modules/Identity/API/MiniECommerce.Modules.Identity.API.csproj" />
+    <ProjectReference Include="../Modules/Identity/Infrastructure/MiniECommerce.Modules.Identity.Infrastructure.csproj" />
+    <ProjectReference Include="../Modules/Catalog/API/MiniECommerce.Modules.Catalog.API.csproj" />
+    <ProjectReference Include="../Modules/Catalog/Infrastructure/MiniECommerce.Modules.Catalog.Infrastructure.csproj" />
+    <ProjectReference Include="../Modules/Inventory/API/MiniECommerce.Modules.Inventory.API.csproj" />
+    <ProjectReference Include="../Modules/Inventory/Infrastructure/MiniECommerce.Modules.Inventory.Infrastructure.csproj" />
+    <ProjectReference Include="../Modules/Cart/API/MiniECommerce.Modules.Cart.API.csproj" />
+    <ProjectReference Include="../Modules/Cart/Infrastructure/MiniECommerce.Modules.Cart.Infrastructure.csproj" />
+    <ProjectReference Include="../Modules/Orders/API/MiniECommerce.Modules.Orders.API.csproj" />
+    <ProjectReference Include="../Modules/Orders/Infrastructure/MiniECommerce.Modules.Orders.Infrastructure.csproj" />
+    <ProjectReference Include="../Modules/Payments/API/MiniECommerce.Modules.Payments.API.csproj" />
+    <ProjectReference Include="../Modules/Payments/Infrastructure/MiniECommerce.Modules.Payments.Infrastructure.csproj" />
+    <ProjectReference Include="../Modules/Reviews/API/MiniECommerce.Modules.Reviews.API.csproj" />
+    <ProjectReference Include="../Modules/Reviews/Infrastructure/MiniECommerce.Modules.Reviews.Infrastructure.csproj" />
+    <ProjectReference Include="../Modules/Notifications/API/MiniECommerce.Modules.Notifications.API.csproj" />
+    <ProjectReference Include="../Modules/Notifications/Infrastructure/MiniECommerce.Modules.Notifications.Infrastructure.csproj" />
+    <ProjectReference Include="../BuildingBlocks/Infrastructure/MiniECommerce.BuildingBlocks.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "MiniECommerce.Host": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:56745;http://localhost:56746"
+    }
+  }
+}

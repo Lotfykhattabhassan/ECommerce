@@ -1,0 +1,7 @@
+Fixed restore issue in Identity/Infrastructure/MiniECommerce.Modules.Identity.Infrastructure.csproj:
+- Removed Microsoft.AspNetCore.Http.Extensions 10.0.12 (package version does not exist on NuGet; ASP.NET Core framework reference already provides the required APIs).
+- Removed Microsoft.Extensions.Http 10.0.12 (unused direct package reference).
+- Removed Microsoft.Extensions.Options.ConfigurationExtensions 10.0.12 (unused direct package reference).
+- Added direct project references from Infrastructure to Identity Application and Domain projects.
+
+The rest of the source code was left unchanged.
