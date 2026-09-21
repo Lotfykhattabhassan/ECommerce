@@ -73,11 +73,6 @@ namespace MiniECommerce.Modules.Identity.Infrastructure.Repositories
                 .ThenInclude(x=>x.Role)
                 .FirstOrDefaultAsync(x => x.Email == email, cancellationToken);
         }
-        public void Delete(User user)
-        {
-            ArgumentNullException.ThrowIfNull(user);
 
-            _dbContext.Users.Remove(user);
-        }
     }
 }

@@ -127,7 +127,7 @@ namespace MiniECommerce.Modules.Identity.Application.Services
             if (role == null)
                 throw new RoleNotFoundException();
 
-            _roleRepository.Delete(role);
+            role.MarkAsDeleted();
 
             await _unitOfWork.SaveChangesAsync(
                 cancellationToken);

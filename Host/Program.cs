@@ -1,5 +1,7 @@
 ﻿using MiniECommerce.Modules.Identity.Application.DependencyInjection;
 using MiniECommerce.Modules.Identity.Infrastructure.DependencyInjection;
+using MiniECommerce.Modules.Reviews.Infrastructure.DependencyInjection;
+using MiniECommerce.Modules.Reviews.Application.DependencyInjection;
 using Microsoft.OpenApi;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -11,6 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddIdentityInfrastructure(
     builder.Configuration);
 builder.Services.AddIdentityApplication();
+builder.Services.AddReviewApplictaion();
+builder.Services.AddReviewInfrastructure(builder.Configuration);
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(options =>
 {

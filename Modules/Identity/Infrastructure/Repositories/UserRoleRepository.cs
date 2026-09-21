@@ -52,10 +52,4 @@ public class UserRoleRepository : IUserRoleRepository
             .ToListAsync(cancellationToken);
     }
 
-    public void Delete(UserRole userRole)
-    {
-        ArgumentNullException.ThrowIfNull(userRole);
-
-        _dbContext.UserRoles.Remove(userRole);
-    }
 }

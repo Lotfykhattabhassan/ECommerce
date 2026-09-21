@@ -11,7 +11,7 @@ public class RolesConfiguration : IEntityTypeConfiguration<Role>
         builder.ToTable("Roles");
 
         builder.HasKey(x => x.Id);
-
+        builder.HasQueryFilter(x => !x.IsDeleted);
         builder.Property(x => x.RoleName)
             .IsRequired()
             .HasMaxLength(50);

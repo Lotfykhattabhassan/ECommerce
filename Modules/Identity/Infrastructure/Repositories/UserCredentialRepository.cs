@@ -32,11 +32,5 @@ namespace MiniECommerce.Modules.Identity.Infrastructure.Repositories
 
         }
 
-        public void Delete(UserCredential credential)
-        {
-            ArgumentNullException.ThrowIfNull(credential);
-
-            _dbContext.UserCredentials.Remove(credential);
-        }
     }
 }

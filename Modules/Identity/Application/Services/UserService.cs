@@ -93,7 +93,7 @@ namespace MiniECommerce.Modules.Identity.Application.Services
             if (user == null)
                 throw new UserNotFoundException();
 
-            _userRepository.Delete(user);
+            user.MarkAsDeleted();
 
             await _unitOfWork.SaveChangesAsync(
                 cancellationToken);

@@ -17,5 +17,4 @@ public interface IUserRoleRepository
         Guid userId,
         CancellationToken cancellationToken = default);
 
-    void Delete(UserRole userRole);
 }

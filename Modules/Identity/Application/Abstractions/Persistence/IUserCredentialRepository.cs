@@ -6,7 +6,6 @@ namespace MiniECommerce.Modules.Identity.Application.Abstractions.Persistence
     {
         Task AddAsync(UserCredential credential, CancellationToken cancellationToken = default);
         Task<UserCredential?> GetByUserIdAsync(Guid userId, CancellationToken cancellationToken = default);
-        void Delete(UserCredential credential);
 
     }
 }

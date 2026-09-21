@@ -22,5 +22,4 @@ public interface IRoleRepository
 
     Task<IReadOnlyList<Role>> GetAllAsync(
         CancellationToken cancellationToken = default);
-    void Delete(Role role);
 }

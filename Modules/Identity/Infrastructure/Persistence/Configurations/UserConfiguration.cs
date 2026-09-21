@@ -12,6 +12,8 @@ namespace MiniECommerce.Modules.Identity.Infrastructure.Persistence.Configuratio
             builder.ToTable("Users");
             builder.HasKey(x => x.Id);
 
+            builder.HasQueryFilter(x => !x.IsDeleted);
+
             builder.Property(x => x.FirstName).IsRequired().HasMaxLength(50);
             builder.Property(x => x.LastName).IsRequired().HasMaxLength(50);
 
