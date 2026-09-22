@@ -26,5 +26,8 @@ namespace MiniECommerce.Modules.Notifications.Application.Services.Abstraction
         Task MarkNotificationAsReadAsync(
             int id,
             CancellationToken cancellationToken = default);
+        Task DeleteNotificationAsync(
+            int id,
+            CancellationToken cancellationToken = default);
     }
 }

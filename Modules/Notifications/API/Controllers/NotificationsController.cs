@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
 using MiniECommerce.Modules.Notifications.Application.DTOs;
 using MiniECommerce.Modules.Notifications.Application.Services;
+using MiniECommerce.Modules.Notifications.Application.Services.Abstraction;
 using MiniECommerce.Modules.Notifications.Domain.Enums;
 using System.Text.RegularExpressions;
 
@@ -14,9 +15,9 @@ namespace MiniECommerce.Modules.Notifications.API.Controllers
     [Authorize]
     public class NotificationsController : ControllerBase
     {
-        private readonly NotificationService _notificationService;
+        private readonly INotificationService _notificationService;
 
-        public NotificationsController(NotificationService notificationService)
+        public NotificationsController(INotificationService notificationService)
         {
             _notificationService = notificationService;
         }

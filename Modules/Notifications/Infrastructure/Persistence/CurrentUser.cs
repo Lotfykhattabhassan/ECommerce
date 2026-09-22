@@ -18,7 +18,7 @@ namespace MiniECommerce.Modules.Notifications.Infrastructure.Persistence
                     .User
                     .FindFirst(JwtRegisteredClaimNames.Sub)?
                         .Value;
-                if (Guid.TryParse(result, out Guid value))
+                if (!Guid.TryParse(result, out Guid value))
                     return null;
 
                 return value;
