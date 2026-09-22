@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using MiniECommerce.Modules.Identity.Infrastructure.Security;
+using MiniECommerce.Modules.Notifications.Infrastructure.DependencyInjection;
+using MiniECommerce.Modules.Notifications.Application.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -15,6 +17,9 @@ builder.Services.AddIdentityInfrastructure(
 builder.Services.AddIdentityApplication();
 builder.Services.AddReviewApplictaion();
 builder.Services.AddReviewInfrastructure(builder.Configuration);
+builder.Services.AddNotificationInfrastructure(builder.Configuration);
+builder.Services.AddNotificationApplication();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen(options =>
 {
