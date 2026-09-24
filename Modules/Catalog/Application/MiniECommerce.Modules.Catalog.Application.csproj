@@ -12,5 +12,6 @@
   <ItemGroup>
     <ProjectReference Include="../Domain/MiniECommerce.Modules.Catalog.Domain.csproj" />
     <ProjectReference Include="../../../BuildingBlocks/Application/MiniECommerce.BuildingBlocks.Application.csproj" />
+    <ProjectReference Include="..\..\..\Contract.Cart\Contract.Cart.csproj" />
   </ItemGroup>
 </Project>

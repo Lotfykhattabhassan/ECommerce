@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Contract.Cart.Abstractions;
+using Contract.Cart.Dtos;
 using FluentValidation;
 using MiniECommerce.Modules.Catalog.Application.Abstractions;
 using MiniECommerce.Modules.Catalog.Application.DTOs.Product;
@@ -9,7 +11,7 @@ using MiniECommerce.Modules.Catalog.Domain.Entities;
 
 namespace MiniECommerce.Modules.Catalog.Application.Services
 {
-    public class ProductService : IProductService
+    public class ProductService : IProductService, IProductCatalog
     {
         private readonly IProductRepository _productRepository;
         private readonly ICategoryRepository _categoryRepository;
@@ -184,6 +186,18 @@ namespace MiniECommerce.Modules.Catalog.Application.Services
 
             product.Restore();
             await _unitOfWork.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task<ProductInfo?> GetProductForCartAsync(Guid productId, CancellationToken cancellationToken)
+        {
+            if (productId == Guid.Empty)
+                throw new InvalidProductDataException();
+
+            var product = await _productRepository.GetProductByIdAsync(productId, cancellationToken);
+            if (product == null)
+                throw new ProductNotFoundException();
+
+            return new ProductInfo(productId, product.Price, product.Status == Domain.Enums.ProductStatus.Active);
         }
     }
 }

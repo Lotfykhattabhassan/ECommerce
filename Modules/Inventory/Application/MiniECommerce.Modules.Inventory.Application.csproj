@@ -4,9 +4,12 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="../Domain/MiniECommerce.Modules.Inventory.Domain.csproj" />
     <ProjectReference Include="../../../BuildingBlocks/Application/MiniECommerce.BuildingBlocks.Application.csproj" />
+    <ProjectReference Include="..\..\..\Contract.Cart\Contract.Cart.csproj" />
   </ItemGroup>
 </Project>

@@ -7,5 +7,6 @@
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
     <ProjectReference Include="../Application/MiniECommerce.Modules.Cart.Application.csproj" />
+    <ProjectReference Include="..\Infrastructure\MiniECommerce.Modules.Cart.Infrastructure.csproj" />
   </ItemGroup>
 </Project>

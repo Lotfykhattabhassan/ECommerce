@@ -4,9 +4,15 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="16.2.0" />
+    <PackageReference Include="FluentValidation" Version="12.1.1" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.1" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="../Domain/MiniECommerce.Modules.Cart.Domain.csproj" />
     <ProjectReference Include="../../../BuildingBlocks/Application/MiniECommerce.BuildingBlocks.Application.csproj" />
+    <ProjectReference Include="..\..\..\Contract.Cart\Contract.Cart.csproj" />
   </ItemGroup>
 </Project>

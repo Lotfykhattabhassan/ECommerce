@@ -9,6 +9,13 @@ using System.Text;
 using MiniECommerce.Modules.Identity.Infrastructure.Security;
 using MiniECommerce.Modules.Notifications.Infrastructure.DependencyInjection;
 using MiniECommerce.Modules.Notifications.Application.DependencyInjection;
+using MiniECommerce.Modules.Catalog.Infrastructure.DependencyInjection;
+using MiniECommerce.Modules.Catalog.Application.DependencyInjection;
+using MiniECommerce.Modules.Inventory.Infrastructure.DependencyInjection;
+using MiniECommerce.Modules.Inventory.Application.DependencyInjection;
+using MiniECommerce.Modules.Inventory.API.Controllers;
+using MiniECommerce.Modules.Cart.API.DependencyInjection;
+using MiniECommerce.Modules.Cart.API.Controllers;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -19,8 +26,15 @@ builder.Services.AddReviewApplictaion();
 builder.Services.AddReviewInfrastructure(builder.Configuration);
 builder.Services.AddNotificationInfrastructure(builder.Configuration);
 builder.Services.AddNotificationApplication();
+builder.Services.AddCartModule(builder.Configuration);
+builder.Services.AddCatalogInfrastructure(builder.Configuration);
+builder.Services.AddCatalogApplication();
+builder.Services.AddInventoryInfrastructure(builder.Configuration);
+builder.Services.AddInventoryApplication();
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddApplicationPart(typeof(InventoryController).Assembly)
+    .AddApplicationPart(typeof(CartController).Assembly);
 builder.Services.AddSwaggerGen(options =>
 {
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
