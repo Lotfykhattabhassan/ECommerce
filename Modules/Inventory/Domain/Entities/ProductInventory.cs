@@ -10,7 +10,8 @@ namespace MiniECommerce.Modules.Inventory.Domain.Entities
 
         private ProductInventory() { }
 
-        private ProductInventory(Guid productId, int quantity)
+        private ProductInventory(Guid id, Guid productId, int quantity)
+            : base(id)
         {
             if (productId == Guid.Empty)
                 throw new ArgumentException(nameof(productId));
@@ -25,7 +26,8 @@ namespace MiniECommerce.Modules.Inventory.Domain.Entities
 
         public static ProductInventory Create(Guid productId, int quantity = 0)
         {
-            return new ProductInventory(productId, quantity);
+            var id = Guid.NewGuid();
+            return new ProductInventory(id,productId, quantity);
         }
 
         public int GetAvailableQuantity()

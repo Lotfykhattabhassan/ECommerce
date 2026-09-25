@@ -1,4 +1,5 @@
 ﻿using Contract.Cart.Abstractions;
+using Contract.Order.Abstractions;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using MiniECommerce.Modules.Catalog.Application.Services;
@@ -16,6 +17,7 @@ namespace MiniECommerce.Modules.Catalog.Application.DependencyInjection
             services.AddValidatorsFromAssembly(assembly);
 
             services.AddScoped<IProductCatalog, ProductService>();
+            services.AddScoped<IOrderCatalog, ProductService>();
 
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICategoryService, CategoryService>();

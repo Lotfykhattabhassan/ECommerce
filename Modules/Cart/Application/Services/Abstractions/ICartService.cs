@@ -31,9 +31,6 @@ namespace MiniECommerce.Modules.Cart.Application.Services.Abstractions
         Task ClearCartAsync(
             CancellationToken cancellationToken = default);
 
-        Task CheckoutAsync(
-            CancellationToken cancellationToken = default);
-
         Task AbandonCartAsync(
             CancellationToken cancellationToken = default);
     }

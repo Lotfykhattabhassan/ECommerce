@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using Contract.Cart.Abstractions;
+using Contract.Order.Abstractions;
+using Contract.Order.Dtos;
 using FluentValidation;
 using MiniECommerce.Modules.Cart.Application.Abstractions;
 using MiniECommerce.Modules.Cart.Application.DTOs.Cart;
@@ -8,9 +10,10 @@ using MiniECommerce.Modules.Cart.Application.Services.Abstractions;
 
 namespace MiniECommerce.Modules.Cart.Application.Services
 {
-    public class CartService : ICartService
+    public class CartService : ICartService, ICartOrder
     {
         private readonly ICartRepository _cartRepository;
+        private readonly ICartItemRepository _cartItemRepository;
         private readonly IUnitOfWork _unitOfWork;
         private readonly ICurrentUser _currentUser;
         private readonly IMapper _mapper;
@@ -21,6 +24,7 @@ namespace MiniECommerce.Modules.Cart.Application.Services
         public CartService(ICartRepository cartRepository,
             IUnitOfWork unitOfWork,
             ICurrentUser currentUser,
+            ICartItemRepository cartItemRepository,
             IMapper mapper,
             IValidator<AddCartItemDto> validator,
             IProductCatalog productCatalog,
@@ -30,6 +34,7 @@ namespace MiniECommerce.Modules.Cart.Application.Services
             _cartRepository = cartRepository;
             _unitOfWork = unitOfWork;
             _currentUser = currentUser;
+            _cartItemRepository = cartItemRepository;
             _mapper = mapper;
             _validator = validator;
             _productCatalog = productCatalog;
@@ -97,22 +102,27 @@ namespace MiniECommerce.Modules.Cart.Application.Services
                 throw new InvalidCartItemDataException();
 
             var cart = await _cartRepository.GetActiveByUserIdAsync(userId.Value, cancellationToken);
-
             if (cart == null)
                 throw new CartNotFoundException();
 
-            var productInfo = await _productCatalog.GetProductForCartAsync(dto.ProductId, cancellationToken);
+            var isNewProduct = !cart.CartItems.Any(x => x.ProductId == dto.ProductId);
 
+            var productInfo = await _productCatalog.GetProductForCartAsync(dto.ProductId, cancellationToken);
             if (!productInfo.IsActive)
                 throw new ProductIsNotActiveException();
 
             var quantityAvailability = await _productInventory
-                .CheckProductQuantityAvailabilityForCartAsync(dto.ProductId,dto.Quantity,cancellationToken);
-            
-            if(!quantityAvailability)
+                .CheckProductQuantityAvailabilityForCartAsync(dto.ProductId, dto.Quantity, cancellationToken);
+            if (!quantityAvailability)
                 throw new UnavailableQuantityException();
 
             cart.AddItem(dto.ProductId, productInfo.Price, dto.Quantity);
+
+            if (isNewProduct)
+            {
+                var newItem = cart.CartItems.First(x => x.ProductId == dto.ProductId);
+                await _cartItemRepository.AddAsync(newItem, cancellationToken); // تسجيل صريح كـ Added
+            }
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
@@ -138,23 +148,6 @@ namespace MiniECommerce.Modules.Cart.Application.Services
                 throw new UnavailableQuantityException();
 
             cart.ChangeItemQuantity(dto.ProductId, dto.Quantity);
-            await _unitOfWork.SaveChangesAsync(cancellationToken);
-        }
-
-        public async Task CheckoutAsync(CancellationToken cancellationToken)
-        {
-            var userId = _currentUser.UserId;
-            if (userId == Guid.Empty)
-                throw new ArgumentException(nameof(userId));
-
-            var cart = await _cartRepository.GetActiveByUserIdAsync(userId.Value, cancellationToken);
-            if (cart == null)
-                throw new CartNotFoundException();
-
-            if (!cart.CartItems.Any())
-                throw new InvalidOperationException("cannot make checkout without items");
-
-            cart.MarkAsCheckedOut();
             await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
 
@@ -215,6 +208,44 @@ namespace MiniECommerce.Modules.Cart.Application.Services
                 throw new CartNotFoundException();
 
             cart.RemoveItem(productId);
+            await _unitOfWork.SaveChangesAsync(cancellationToken);
+        }
+
+        public async Task<CartReadForOrderDto> GetCartInfoForOrder(
+            Guid userId,
+            CancellationToken cancellationToken)
+        {
+            if (userId == Guid.Empty)
+                throw new ArgumentException(nameof(userId));
+
+            var cart = await _cartRepository
+                .GetActiveByUserIdAsync(userId, cancellationToken);
+
+            if (cart == null)
+                throw new CartNotFoundException();
+
+            var items = cart.CartItems
+                .Select(x => new CartItemForOrderDto(
+                    x.ProductId,
+                    x.Quantity,
+                    x.UnitPrice))
+                .ToList();
+
+            return new CartReadForOrderDto(items);
+        }
+
+        public async Task CheckedOutCartForOrder(Guid userId, CancellationToken cancellationToken)
+        {
+            if (userId == Guid.Empty)
+                throw new ArgumentException(nameof(userId));
+
+            var cart = await _cartRepository
+                .GetActiveByUserIdAsync(userId, cancellationToken);
+
+            if (cart == null)
+                throw new CartNotFoundException();
+
+            cart.MarkAsCheckedOut();
             await _unitOfWork.SaveChangesAsync(cancellationToken);
         }
     }

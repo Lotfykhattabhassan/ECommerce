@@ -122,16 +122,6 @@ namespace MiniECommerce.Modules.Cart.API.Controllers
             return NoContent();
         }
 
-        [HttpPost("checkout")]
-        public async Task<IActionResult> Checkout(
-            CancellationToken cancellationToken)
-        {
-            await _cartService.CheckoutAsync(
-                cancellationToken);
-
-            return NoContent();
-        }
-
         [HttpPost("abandon")]
         public async Task<IActionResult> Abandon(
             CancellationToken cancellationToken)

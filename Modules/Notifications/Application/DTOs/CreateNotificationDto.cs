@@ -5,12 +5,12 @@ namespace MiniECommerce.Modules.Notifications.Application.DTOs
 {
     public class CreateNotificationDto
     {
-        public Guid UserId { get; private set; }
+        public Guid UserId { get; set; }
 
-        public string Title { get; private set; } = null!;
+        public string Title { get; set; } = null!;
 
-        public string Message { get; private set; } = null!;
+        public string Message { get; set; } = null!;
 
-        public NotificationType Type { get; private set; }
+        public NotificationType Type { get; set; }
     }
 }

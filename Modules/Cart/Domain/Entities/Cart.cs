@@ -13,7 +13,8 @@ namespace MiniECommerce.Modules.Cart.Domain.Entities
             => _cartItems.AsReadOnly();
 
         private Cart() { }
-        private Cart(Guid userId)
+        private Cart(Guid id,Guid userId)
+            : base(id)
         {
             if (userId == Guid.Empty)
                 throw new ArgumentException(nameof(userId));
@@ -21,9 +22,10 @@ namespace MiniECommerce.Modules.Cart.Domain.Entities
             UserId = userId;
             Status = CartStatus.Active;
         }
-        public static Cart Create(Guid userId)
+        public static Cart Create( Guid userId)
         {
-            return new Cart(userId);
+            var id = Guid.NewGuid();
+            return new Cart(id, userId);
         }
         public void AddItem(
             Guid productId,

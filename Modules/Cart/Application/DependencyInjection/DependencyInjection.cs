@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Contract.Order.Abstractions;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using MiniECommerce.Modules.Cart.Application.Services;
 using MiniECommerce.Modules.Cart.Application.Services.Abstractions;
@@ -12,7 +13,8 @@ namespace MiniECommerce.Modules.Cart.Application.DependencyInjection
             var assembly = typeof(DependencyInjection).Assembly;
             services.AddAutoMapper(cfg => { }, assembly);
             services.AddValidatorsFromAssembly(assembly);
-            services.AddScoped<ICartService, CartService>();
+            services.AddScoped<ICartService, CartService>(); 
+            services.AddScoped<ICartOrder, CartService>();
             services.AddScoped<ICartItemService, CartItemService>();
             return services;
         }

@@ -14,9 +14,10 @@ namespace MiniECommerce.Modules.Catalog.Domain.Entities
         {
             
         }
-        private Category(string name,
+        private Category(Guid id, string name,
             string? description,
             Guid? parentCategoryId)
+            : base(id)
         {
             ArgumentNullException.ThrowIfNull(name);
             Name = name;
@@ -30,7 +31,8 @@ namespace MiniECommerce.Modules.Catalog.Domain.Entities
             string? description,
             Guid? parentCategoryId)
         {
-            return new Category(name, description, parentCategoryId);
+            var id = Guid.NewGuid();
+            return new Category(id,name, description, parentCategoryId);
         }
 
         public void ChangeCategoryName(string name)

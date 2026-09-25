@@ -19,11 +19,12 @@ namespace MiniECommerce.Modules.Catalog.Domain.Entities
 
         private Product() { }
 
-        private Product(string name,
+        private Product(Guid id, string name,
            string? description,
            decimal price,
            string sku,
            Guid categoryId)
+            : base(id)
         {
             ArgumentNullException.ThrowIfNull(name);
             Name = name;
@@ -48,7 +49,8 @@ namespace MiniECommerce.Modules.Catalog.Domain.Entities
            string sku,
            Guid categoryId)
         {
-            return new Product(name, description, price, sku, categoryId);
+            var id = Guid.NewGuid();
+            return new Product(id,name, description, price, sku, categoryId);
         }
 
         public void ChangeProductName(string name)

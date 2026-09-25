@@ -4,9 +4,13 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="16.2.0" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="../Domain/MiniECommerce.Modules.Orders.Domain.csproj" />
     <ProjectReference Include="../../../BuildingBlocks/Application/MiniECommerce.BuildingBlocks.Application.csproj" />
+    <ProjectReference Include="..\..\..\Contract.Order\Contract.Order.csproj" />
   </ItemGroup>
 </Project>

@@ -10,10 +10,11 @@ namespace MiniECommerce.Modules.Cart.Domain.Entities
         public decimal UnitPrice { get; private set; }
         public Cart Cart { get; set; }
         private CartItem() { }
-        private CartItem(Guid cartId,
+        private CartItem(Guid id, Guid cartId,
             Guid productId,
             int quantity,
             decimal unitPrice)
+            : base(id)
         {
             if (cartId == Guid.Empty)
                 throw new ArgumentException(nameof(cartId));
@@ -36,7 +37,8 @@ namespace MiniECommerce.Modules.Cart.Domain.Entities
             int quantity,
             decimal unitPrice)
         {
-            return new CartItem(cartId, productId, quantity, unitPrice);
+            var id = Guid.NewGuid();
+            return new CartItem(id, cartId, productId, quantity, unitPrice);
         }
         public void IncreaseQuantity(int quantity)
         {

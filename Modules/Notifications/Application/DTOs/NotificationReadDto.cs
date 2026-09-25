@@ -5,6 +5,7 @@ namespace MiniECommerce.Modules.Notifications.Application.DTOs
 {
     public class NotificationReadDto
     {
+        public int Id { get; set; }
         public Guid UserId { get; private set; }
 
         public string Title { get; private set; } = null!;
