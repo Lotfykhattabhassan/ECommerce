@@ -100,6 +100,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contract", "Contract", "{75
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contract.Cart", "Contract.Cart\Contract.Cart.csproj", "{F9A43692-9B52-4122-82DF-FC74C6F116F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contract.Order", "Contract.Order\Contract.Order.csproj", "{692E678B-5228-4599-AA8F-66987D23AEEC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -254,6 +256,10 @@ Global
 		{F9A43692-9B52-4122-82DF-FC74C6F116F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9A43692-9B52-4122-82DF-FC74C6F116F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9A43692-9B52-4122-82DF-FC74C6F116F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{692E678B-5228-4599-AA8F-66987D23AEEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{692E678B-5228-4599-AA8F-66987D23AEEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{692E678B-5228-4599-AA8F-66987D23AEEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{692E678B-5228-4599-AA8F-66987D23AEEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -305,6 +311,7 @@ Global
 		{D2DE090B-07CF-42F1-90D0-5CD2D6740AF3} = {AFE793AB-E3CE-4F9B-A6B9-C612827D0FAB}
 		{75074E8F-8E65-4287-A846-9C05DD30ED7E} = {178981F7-FF0B-4FD8-B0BF-4C7B23315605}
 		{F9A43692-9B52-4122-82DF-FC74C6F116F0} = {75074E8F-8E65-4287-A846-9C05DD30ED7E}
+		{692E678B-5228-4599-AA8F-66987D23AEEC} = {75074E8F-8E65-4287-A846-9C05DD30ED7E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {27EAD007-6054-4BC1-A34D-41CCF91ADB6B}

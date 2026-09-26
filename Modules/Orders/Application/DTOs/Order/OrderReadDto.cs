@@ -1,4 +1,5 @@
-﻿using MiniECommerce.Modules.Orders.Domain.Enums;
+﻿using MiniECommerce.Modules.Orders.Application.DTOs.OrderItem;
+using MiniECommerce.Modules.Orders.Domain.Enums;
 
 namespace MiniECommerce.Modules.Orders.Application.DTOs.Order
 {
@@ -7,6 +8,6 @@ namespace MiniECommerce.Modules.Orders.Application.DTOs.Order
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public OrderStatus Status { get; set; }
-        public IReadOnlyList<Domain.Entities.OrderItem> OrderItems { get; set; }
+        public IReadOnlyList<OrderItemReadDto> OrderItems { get; set; }
     }
 }

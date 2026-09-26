@@ -16,6 +16,10 @@ using MiniECommerce.Modules.Inventory.Application.DependencyInjection;
 using MiniECommerce.Modules.Inventory.API.Controllers;
 using MiniECommerce.Modules.Cart.API.DependencyInjection;
 using MiniECommerce.Modules.Cart.API.Controllers;
+using MiniECommerce.Modules.Orders.API.DependencyInjection;
+using MiniECommerce.Modules.Orders.API.Controllers;
+using MiniECommerce.Modules.Payments.API.DependencyInjection;
+using MiniECommerce.Modules.Payment.API.Controllers;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -27,6 +31,8 @@ builder.Services.AddReviewInfrastructure(builder.Configuration);
 builder.Services.AddNotificationInfrastructure(builder.Configuration);
 builder.Services.AddNotificationApplication();
 builder.Services.AddCartModule(builder.Configuration);
+builder.Services.AddOrdersModule(builder.Configuration);
+builder.Services.AddPaymentsModule(builder.Configuration);
 builder.Services.AddCatalogInfrastructure(builder.Configuration);
 builder.Services.AddCatalogApplication();
 builder.Services.AddInventoryInfrastructure(builder.Configuration);
@@ -34,7 +40,9 @@ builder.Services.AddInventoryApplication();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(InventoryController).Assembly)
-    .AddApplicationPart(typeof(CartController).Assembly);
+    .AddApplicationPart(typeof(CartController).Assembly)
+    .AddApplicationPart(typeof(OrderController).Assembly)
+    .AddApplicationPart(typeof(PaymentController).Assembly);
 builder.Services.AddSwaggerGen(options =>
 {
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme

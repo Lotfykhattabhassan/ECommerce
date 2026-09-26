@@ -1,6 +1,4 @@
-﻿using MiniECommerce.BuildingBlocks.Domain.Events;
-
-namespace MiniECommerce.BuildingBlocks.Domain.Common
+﻿namespace MiniECommerce.BuildingBlocks.Domain.Common
 {
     public abstract class Entity<TId>
     {
@@ -52,24 +50,5 @@ namespace MiniECommerce.BuildingBlocks.Domain.Common
             UpdatedBy = updatedBy;
         }
 
-        private readonly List<IDomainEvent> _domainEvents = [];
-
-        public IReadOnlyCollection<IDomainEvent> DomainEvents
-            => _domainEvents.AsReadOnly();
-
-        protected void AddDomainEvent(IDomainEvent domainEvent)
-        {
-            _domainEvents.Add(domainEvent);
-        }
-
-        protected void RemoveDomainEvent(IDomainEvent domainEvent)
-        {
-            _domainEvents.Remove(domainEvent);
-        }
-
-        public void ClearDomainEvents()
-        {
-            _domainEvents.Clear();
-        }
     }
 }
