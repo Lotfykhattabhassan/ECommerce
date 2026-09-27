@@ -34,6 +34,7 @@ namespace MiniECommerce.Modules.Cart.Infrastructure.Repositories
                 throw new ArgumentException(nameof(id));
 
             return await _context.CartItems
+                .Include(x=>x.Cart)
                 .FirstOrDefaultAsync(
                     x => x.Id == id,
                     cancellationToken);
@@ -51,6 +52,7 @@ namespace MiniECommerce.Modules.Cart.Infrastructure.Repositories
                 throw new ArgumentException(nameof(productId));
 
             return await _context.CartItems
+                .Include(x => x.Cart)
                 .FirstOrDefaultAsync(
                     x => x.CartId == cartId &&
                          x.ProductId == productId,
@@ -65,6 +67,7 @@ namespace MiniECommerce.Modules.Cart.Infrastructure.Repositories
                 throw new ArgumentException(nameof(cartId));
 
             return await _context.CartItems
+                .Include(x => x.Cart)
                 .Where(x => x.CartId == cartId)
                 .ToListAsync(cancellationToken);
         }

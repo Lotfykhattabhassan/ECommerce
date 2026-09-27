@@ -61,6 +61,9 @@ namespace MiniECommerce.Modules.Orders.Application.Services
             if (order == null)
                 throw new OrderNotFoundException();
 
+            if (order.Status == Domain.Enums.OrderStatus.Cancelled)
+                throw new InvalidOperationException("Cannot change quantity of cancelled order");
+
             orderItem.ChangeQuantity(quantity);
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);
