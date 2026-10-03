@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Hosting;
 using MiniECommerce.Modules.Notifications.Application.DTOs;
-using MiniECommerce.Modules.Notifications.Application.Services;
 using MiniECommerce.Modules.Notifications.Application.Services.Abstraction;
 using MiniECommerce.Modules.Notifications.Domain.Enums;
-using System.Text.RegularExpressions;
 
 namespace MiniECommerce.Modules.Notifications.API.Controllers
 {

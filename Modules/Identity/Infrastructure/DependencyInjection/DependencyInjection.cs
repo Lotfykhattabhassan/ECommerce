@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using MiniECommerce.Modules.Identity.Application.Abstractions.Persistence;
 using MiniECommerce.Modules.Identity.Application.Abstractions.Security;
 using MiniECommerce.Modules.Identity.Infrastructure.Persistence;
@@ -20,6 +21,14 @@ namespace MiniECommerce.Modules.Identity.Infrastructure.DependencyInjection
             services.Configure<JwtOptions>(
                  configuration.GetSection(JwtOptions.SectionName));
 
+            services.Configure<AuthenticationOptions>(
+                configuration.GetSection(
+                    "Authentication"));
+
+            services.AddScoped<IAuthenticationOptions>(
+                sp => sp.GetRequiredService<
+                    IOptions<AuthenticationOptions>>().Value);
+
             services.AddHttpContextAccessor();
 
             services.AddScoped<ICurrentUser, CurrentUser>();
@@ -30,8 +39,14 @@ namespace MiniECommerce.Modules.Identity.Infrastructure.DependencyInjection
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IUserRoleRepository, UserRoleRepository>();
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+            services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<ICurrentUser, CurrentUser>();
+
+            services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+            services.AddScoped<IRefreshTokenGenerator, RefreshTokenGenerator>();
+            services.AddScoped<IRefreshTokenHasher, RefreshTokenHasher>();
 
             return services;
         }

@@ -16,18 +16,20 @@ namespace MiniECommerce.Modules.Notifications.Application.Services
         private readonly IMapper _mapper;
         private readonly ICurrentUser _currentUser;
         private readonly IValidator<CreateNotificationDto> _validator;
-
+        private readonly INotificationRealtimePublisher _notificationRealtimePublisher;
         public NotificationService(
             INotificationRepository notificationRepository,
             IUnitOfWork unitOfWork,
             IMapper mapper,
             ICurrentUser currentUser,
-            IValidator<CreateNotificationDto> validator)
+            IValidator<CreateNotificationDto> validator,
+            INotificationRealtimePublisher notificationRealtimePublisher)
         {
             _notificationRepository = notificationRepository;
             _unitOfWork = unitOfWork;
             _mapper = mapper;
             _currentUser = currentUser;
+            _notificationRealtimePublisher = notificationRealtimePublisher;
             _validator = validator;
         }
 
@@ -51,6 +53,18 @@ namespace MiniECommerce.Modules.Notifications.Application.Services
                 cancellationToken);
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);
+            
+            await _notificationRealtimePublisher
+                .PublishAsync(notification.UserId,new NotificationRealtimeDto
+                {
+                    Id = notification.Id,
+                    Title = notification.Title,
+                    Message = notification.Message,
+                    Type = notification.Type,
+                    CreatedAt =notification.CreatedAt,
+                    IsRead = notification.IsRead,
+                    ReadAt = notification.ReadAt
+                });
 
             return notification.Id;
         }

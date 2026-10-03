@@ -18,7 +18,7 @@ namespace MiniECommerce.Modules.Identity.Infrastructure.Security
                     "JWT SecretKey is missing from configuration.");
         }
 
-        public JwtTokenResult Generate(Guid userId, string email, IReadOnlyCollection<string> roles)
+        public JwtAccessTokenResult Generate(Guid userId, string email, IReadOnlyCollection<string> roles)
         {
             var claims = new List<Claim>
             {
@@ -46,7 +46,7 @@ namespace MiniECommerce.Modules.Identity.Infrastructure.Security
             );
 
             var accessToken = new JwtSecurityTokenHandler().WriteToken(token);
-            return new JwtTokenResult
+            return new JwtAccessTokenResult
             (accessToken, expirationDate);
         }
     }

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using MiniECommerce.Modules.Identity.Application.Abstractions.Security;
 using MiniECommerce.Modules.Identity.Application.DTOs.Auth;
 using MiniECommerce.Modules.Identity.Application.Services.Abstractions;
 
@@ -58,5 +59,30 @@ public class AuthController : ControllerBase
         var result = await _authService.GetMe(cancellationToken);
 
         return Ok(result);
+    }
+
+    [HttpPost("refresh")]
+    public async Task<ActionResult<JwtTokenResult>> Refresh(
+    RefreshTokenRequest request,
+    CancellationToken cancellationToken)
+    {
+        var result = await _authService.RefreshAsync(
+            request,
+            cancellationToken);
+
+        return Ok(result);
+    }
+
+    [HttpPost("logout")]
+    [Authorize]
+    public async Task<IActionResult> Logout(
+    RefreshTokenRequest request,
+    CancellationToken cancellationToken)
+    {
+        await _authService.LogoutAsync(
+            request,
+            cancellationToken);
+
+        return NoContent();
     }
 }
